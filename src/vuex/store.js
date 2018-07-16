@@ -1,0 +1,188 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  // 定义状态
+  state: {
+    all_data: [],
+    filter_data: [],
+    start_time: '',
+    end_time: '',
+    search_key: '',
+    search_time: [],
+    all_front_data: [],
+    default_front_data: {
+      important_service:[{
+        select_default_value1: '正常',
+        select_default_value2: '正常',
+        select_default_value3: '正常',
+        select_default_value4: '正常',
+        select_default_value5: '正常'
+        }],
+      idc_table_data: [{
+        select_default_value_ca_tem: '正常',  //ca机房温度
+        select_default_value_ca_hum: '正常',  //ca机房湿度
+        select_default_value_5_tem: '正常',   //5楼机房温度
+        select_default_value_5_hum: '正常',   //5楼机房湿度
+        select_default_value_2_tem: '正常',   //2号楼机房温度
+        select_default_value_2_hum: '正常',   //2号楼机房湿度
+        value_of_check_time: '',  // 机房巡检时间
+        value_of_workers: 'sysmgr1', // 存放机房巡检人
+      }, {
+        select_default_value_ca_tem: '正常',  //ca机房温度
+        select_default_value_ca_hum: '正常',  //ca机房湿度
+        select_default_value_5_tem: '正常',   //5楼机房温度
+        select_default_value_5_hum: '正常',   //5楼机房湿度
+        select_default_value_2_tem: '正常',   //2号楼机房温度
+        select_default_value_2_hum: '正常',   //2号楼机房湿度
+        value_of_check_time: '',  // 机房巡检时间
+        value_of_workers: 'sysmgr1', // 存放机房巡检人
+      }, {
+        select_default_value_ca_tem: '正常',  //ca机房温度
+        select_default_value_ca_hum: '正常',  //ca机房湿度
+        select_default_value_5_tem: '正常',   //5楼机房温度
+        select_default_value_5_hum: '正常',   //5楼机房湿度
+        select_default_value_2_tem: '正常',   //2号楼机房温度
+        select_default_value_2_hum: '正常',   //2号楼机房湿度
+        value_of_check_time: '',  // 机房巡检时间
+        value_of_workers: 'sysmgr1', // 存放机房巡检人
+      }, {
+        select_default_value_ca_tem: '正常',  //ca机房温度
+        select_default_value_ca_hum: '正常',  //ca机房湿度
+        select_default_value_5_tem: '正常',   //5楼机房温度
+        select_default_value_5_hum: '正常',   //5楼机房湿度
+        select_default_value_2_tem: '正常',   //2号楼机房温度
+        select_default_value_2_hum: '正常',   //2号楼机房湿度
+        value_of_check_time: '',  // 机房巡检时间, 赋值的话必须为时间类型  new Date(Date.parse('2018-09-09 12:09:09'))
+        value_of_workers: 'sysmgr1', // 存放机房巡检人
+      }]
+      ,
+      detail_table_data: [{
+        hardware_default_value: '无',
+        system_default_value: '无',
+        network_default_value: '无',
+        service_default_value: '无',
+        other_default_value: '无',
+        is_handle: '是',
+        is_report: '无',
+        alert_source: 'sos2',
+      }],
+      all_workers: [{
+        value: '6.18 白班',
+        label: '张三，李四'
+      }, {
+        value: '6.18 夜班',
+        label: '张三，李四'
+      }],  // 所有可选值班人员，需要从后台获取， 类型数组
+      default_worker: '张三，李四   6.18 夜班',  // 默认的值班人员，需要从后台获取，类型字符串
+      check_workers: ['李四', '张三'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
+      },
+    check_workers: ['李四', '张三'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
+    default_worker: '张三，李四   6.18 夜班',  // 默认的值班人员，需要从后台获取，类型字符串
+    all_workers: [{
+      value: '6.18 白班',
+      label: '张三，李四'
+    }, {
+      value: '6.18 夜班',
+      label: '张三，李四'
+    }],  // 所有的值班人员，需要从后台获取，类型数组
+    important_select_default_value: [],
+    idc_table_data: [],
+    detail_table_data: [],
+  },
+  mutations: {
+    changeAllData (state, datas) {
+      state.all_data = datas
+    },
+    changeFilterData (state, filterData) {
+      if (filterData[0] == 'none_data'){
+        state.filter_data = ['none_data']
+      }else{
+        state.filter_data = filterData;
+      }
+    },
+    changeSearchTime (state, timeArry) {
+      if (timeArry == 'clear'){
+        state.search_time = []
+      }
+      state.start_time = timeArry[0];
+      state.end_time = timeArry[1];
+    },
+    changeSearchKey (state, SearchKey) {
+      state.search_key = SearchKey;
+    },
+    changeIdcTableData (state, data) {
+      state.idc_table_data = data;
+      let save_data = JSON.stringify(data)
+      sessionStorage.setItem('idc_table_data', save_data);
+    },
+    changeDetailData (state, data) {
+      state.detail_table_data = data;
+      let save_data = JSON.stringify(data)
+      sessionStorage.setItem('detail_table_data', save_data);
+    },
+    changeImportantService (state, data) {
+      state.important_select_default_value = data
+      console.log(data, 'data');
+      console.log(state.important_select_default_value[0].select_default_value1, 'important')
+      let save_data = JSON.stringify(data)
+      sessionStorage.setItem('important_select_default_value', save_data);
+    },
+    changeAllFrontData (state, data) {
+      console.log(data, 'ccccccccccccccccccccc')
+      if (data.detail_table_data.length == 0) {  // 更改详细记录的数据
+        state.all_front_data = state.default_front_data // 设置默认值
+        state.idc_table_data = state.default_front_data.idc_table_data
+        state.detail_table_data = state.default_front_data.detail_table_data
+      }else {
+        state.all_front_data = data
+        state.idc_table_data = state.all_front_data.idc_table_data
+        let save_data = JSON.stringify(state.all_front_data.idc_table_data)
+        sessionStorage.setItem('idc_table_data', save_data);
+        console.log(state.idc_table_data,'idc')
+
+        state.detail_table_data = state.all_front_data.detail_table_data
+        let idc_data = JSON.stringify(state.all_front_data.detail_table_data)
+        sessionStorage.setItem('detail_table_data', idc_data);
+        console.log(state.detail_table_data,'detail')
+      }
+        
+    },
+    
+  },
+  getters: {
+    // 相当于computed
+    important_service_data: function (state) {
+      if (state.important_select_default_value.length == 0) {
+        let important_select = JSON.parse(sessionStorage.getItem('important_select_default_value')); // 注意：important_select这个变量名在getters中，
+        // 要保证唯一
+        console.log(important_select, 'ppppp')
+        state.important_select_default_value = important_select;
+        return important_select
+      }
+    },
+    idc_table_data: function (state) {
+      if (state.idc_table_data.length == 0) {
+        let idc_data = JSON.parse(sessionStorage.getItem('idc_table_data')); // 注意：idc_data这个变量名在getters中，
+        // 要保证唯一
+        state.idc_table_data = idc_data;
+        return idc_data
+      }else{
+        return state.idc_table_data
+      }
+
+    },
+    detail_table_data: function (state){
+      if(state.detail_table_data.length == 0){
+        let  detail_data = JSON.parse(sessionStorage.getItem('detail_table_data'));
+        state.detail_table_data = detail_data;
+        return detail_data
+      }
+    },
+
+  }
+});
+
+export default store
