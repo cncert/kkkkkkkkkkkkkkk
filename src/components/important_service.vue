@@ -96,6 +96,7 @@
   export default{
 
     data () {
+      // this.getApiData()
       return {
         options: [{
           value: '平稳运行',
@@ -110,50 +111,25 @@
           value: '遭受攻击',
           label: '遭受攻击'
         }],
-        select_default_value: this.$store.state.important_select_default_value
+        select_default_value: this.$store.state.important_service_data
+      }
+    },
+    methods: {
+      getApiData (){
+        this.$api.get('current_record_data',null, r =>{
+            this.$store.commit('changeAllFrontData', r.data)
+            console.log(r.data, 'brfore created, axios get')
+        })
       }
     },
     beforeCreate: function (){
         // 从接口获取数据all_front_data, 数据结构等同于下边的default_front_data, 后台接口是从一个all_front_data.json文件
         // 中读取数据，该文件有暂存数据的功能
-        let all_front_data = {  // 这里需要从接口获取数据
-          important_service:[],
-            idc_table_data: [],
-            detail_table_data: [{
-            hardware_default_value: '无',
-            system_default_value: '无',
-            network_default_value: '无',
-            service_default_value: '无',
-            other_default_value: '无',
-            is_handle: '是',
-            is_report: '无',
-            alert_source: 'sos2',
-          }],
-          all_workers: [{
-            value: '6.18 白班',
-            label: '张三，李四'
-          }, {
-            value: '6.18 夜班',
-            label: '张三，李四'
-          }],
-          default_worker: '张三，李四   6.18 夜班',
-          check_workers: ['李四', '张三'],
-        };
-        let default_front_data = {
-          important_service:[{
-            select_default_value1: '正常',
-            select_default_value2: '正常',
-            select_default_value3: '正常',
-            select_default_value4: '正常',
-            select_default_value5: '正常'
-            }]
-        };
-        if (all_front_data.important_service.length == 0){  // 更改重要服务检查数据
-          this.$store.commit('changeImportantService', default_front_data.important_service)
-
-        }else {
-          this.$store.commit('changeImportantService', default_front_data.important_service)
-        }
+        this.$api.get('current_record_data',null, r =>{
+            this.$store.commit('changeAllFrontData', r.data)
+            console.log(r.data, 'brfore created, axios get')
+        })
+        
     },
     
         

@@ -13,11 +13,11 @@
       @selection-change="handleIdcSelectionChange">
       <el-table-column
         type="selection"
-        width="30">
+        min-width="30">
       </el-table-column>
       <el-table-column
         label="CA机房温度"
-        width="180"
+        min-width="180"
         align="center"
       >
         <template slot-scope="scope">
@@ -36,7 +36,7 @@
       <el-table-column
         label="CA机房湿度"
         align="center"
-        width="180"
+        min-width="180"
       >
         <template slot-scope="scope">
           <div class="my-select">
@@ -54,7 +54,7 @@
       <el-table-column
         label="5楼机房温度"
         align="center"
-        width="180"
+        min-width="180"
       >
         <template slot-scope="scope">
           <div class="my-select">
@@ -73,7 +73,7 @@
       <el-table-column
         label="5楼机房湿度"
         align="center"
-        width="180">
+        min-width="180">
         <template slot-scope="scope">
           <div class="my-select">
             <el-select v-model="scope.row.select_default_value_5_hum" class="select-style">
@@ -90,7 +90,7 @@
       <el-table-column
         align="center"
         label="2号楼机房温度"
-        width="180">
+        min-width="180">
         <template slot-scope="scope">
           <div class="my-select">
             <el-select v-model="scope.row.select_default_value_2_tem" class="select-style">
@@ -112,7 +112,7 @@
       <el-table-column
         label="2号楼机房湿度"
         align="center"
-        width="180">
+        min-width="180">
         <template slot-scope="scope">
           <div class="my-select">
             <el-select v-model="scope.row.select_default_value_2_hum" class="select-style">
@@ -129,7 +129,7 @@
       <el-table-column
         label="巡检时间"
         align="center"
-        width="240">
+        min-width="240">
         <template slot-scope="scope">
           <div class="block">
             <el-date-picker
@@ -143,19 +143,19 @@
       <el-table-column
         label="巡检人员"
         align="center"
-        width="250"
+        min-width="250"
       >
         <template slot-scope="scope">
           <div class="my-worker-style">
           <el-select
-            v-model="scope.row.value_of_workers"
+            v-model="scope.row.check_workers"
             multiple
             filterable
             allow-create
             default-first-option
             placeholder="请选择或输入">
             <el-option
-              v-for="item in workers"
+              v-for="item in check_workers"
               :key="item"
               :value="item"
               :label="item">
@@ -182,11 +182,11 @@
               @selection-change="handleDetailSelectionChange">
       <el-table-column
         type="selection"
-        width="30">
+        min-width="30">
       </el-table-column>
       <el-table-column
         label="硬件"
-        width="220"
+        min-width="220"
         align="center">
         <template slot-scope="scope">
           <div class="my-textarea">
@@ -197,7 +197,7 @@
       <el-table-column
         label="系统"
         align="center"
-        width="220"
+        min-width="220"
         >
         <template slot-scope="scope">
           <div class="my-textarea">
@@ -208,7 +208,7 @@
       <el-table-column
         label="网络"
         align="center"
-        width="220"
+        min-width="220"
         >
         <template slot-scope="scope">
           <div class="my-textarea">
@@ -220,7 +220,7 @@
       <el-table-column
         label="服务"
         align="center"
-        width="230">
+        min-width="230">
         <template slot-scope="scope">
           <div class="my-textarea">
             <el-input v-model="scope.row.service_default_value" placeholder="" type="textarea"  autosize resize="none"></el-input>
@@ -230,7 +230,7 @@
       <el-table-column
         align="center"
         label="其他"
-        width="230">
+        min-width="230">
         <template slot-scope="scope">
           <div class="my-textarea">
             <el-input v-model="scope.row.other_default_value" placeholder="" type="textarea"  autosize resize="none"></el-input>
@@ -240,7 +240,7 @@
       <el-table-column
         label="是否处理"
         align="center"
-        width="150"
+        min-width="150"
         >
         <template slot-scope="scope">
           <el-select v-model="scope.row.is_handle" placeholder="请选择">
@@ -257,7 +257,7 @@
       <el-table-column
         label="故障报告"
         align="center"
-        width="150"
+        min-width="150"
         >
         <template slot-scope="scope">
           <el-select v-model="scope.row.is_report" placeholder="请选择">
@@ -274,7 +274,7 @@
       <el-table-column
         label="告警源"
         align="center"
-        width="150"
+        min-width="150"
         >
         <template slot-scope="scope">
           <div class="my-cell">
@@ -315,7 +315,7 @@
       name: "main_table",
       data() {
         return {
-          workers:this.$store.state.check_workers,
+          check_workers:this.$store.state.check_workers,
           value_of_datetime: '',
           options: [{
             value: '正常',
@@ -327,10 +327,10 @@
         
           // idc表的默认数据
           // 可以定时将此数据提交给后台存起来成为一个新的数据集
-          idc_table_data: this.$store.getters.idc_table_data,
+          idc_table_data: this.$store.state.idc_table_data,
           idcMultipleSelection: [], // idc表选中的数据,用于删除
           detailMultipleSelection: [], // 详细记录表选中的数据,用于删除
-          detail_table_data: this.$store.getters.detail_table_data,
+          detail_table_data: this.$store.state.detail_table_data,
           is_handle_select_option: [{
             value: '选项1',
             label: '是'
@@ -381,7 +381,7 @@
             select_default_value_2_tem: '正常',   //2号楼机房温度
             select_default_value_2_hum: '正常',   //2号楼机房湿度
             value_of_check_time: '',  // 机房巡检时间
-            value_of_workers: this.$store.state.check_workers, // 存放机房巡检人
+            check_workers: this.$store.state.check_workers, // 存放机房巡检人
           })
         },
         handleDetailSelectionChange(val) {
@@ -410,10 +410,31 @@
             }
           }
         },
-        fetch_all_data() {  // 获取所有要提交的数据
-            console.log(this.$store.state.important_select_default_value);
-            console.log(this.idc_table_data)
-            console.log(this.detail_table_data)
+        fetch_all_data() {  // 获取所有要提交的数据,并提交
+            let important_service = this.$store.state.important_select_default_value;
+            let idc_data = this.idc_table_data
+            let detail_data = this.detail_table_data
+            let params
+            
+            if(idc_data.length != 0){
+              console.log('dd')
+              let value_of_check_time
+              for (var i=0;i<idc_data.length; i++){
+                value_of_check_time = moment(idc_data[i].value_of_check_time).format("YYYY-MM-DD HH:mm:ss");
+                idc_data[i].value_of_check_time = value_of_check_time
+                console.log(value_of_check_time)
+              }
+            }
+            console.log(idc_data)
+            params = {
+              important_service: important_service,
+              idc_data: idc_data,
+              detail_data: detail_data
+            }
+            
+            this.$api.post('current_record_data',params, r =>{
+                console.log(r)
+            })
         },
         // // open2是弹出提示框
         // open2(callback) {
@@ -436,14 +457,6 @@
         // }
         // //
       },
-      beforeCreate: function () {
-        // 从接口获取数据all_front_data, 数据结构等同于下边的default_front_data, 后台接口是从一个all_front_data.json文件
-        // 中读取数据，该文件有暂存数据的功能
-        // 从服务器获取数据
-        this.$api.get('current_record_data',null, r =>{
-            this.$store.commit('changeAllFrontData', r.data)
-        })
-      }
     }
 </script>
 
