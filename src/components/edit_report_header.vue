@@ -15,7 +15,7 @@
 
         <el-menu-item index="3" class="align-right select-people">
         <template>
-          <el-select v-model="default_worker" placeholder="请选择值班人员" size="small">
+          <el-select v-model="default_worker[0]" placeholder="请选择值班人员" size="small">
             <el-option
             v-for="item in worker"
             :key="item.value"
@@ -37,8 +37,6 @@
       return {
         activeIndex: '1',
         activeIndex2: '0',
-        worker: this.$store.state.all_workers,
-        default_worker: this.$store.state.default_worker,
       };
     },
     methods: {
@@ -46,6 +44,14 @@
         // 获取选中元素的属性：index值等
         console.log(key, keyPath,'获取选中元素的属性：index值等');
       },
+    },
+    computed: {
+      worker: function () {
+        return this.$store.state.all_workers
+      },
+      default_worker: function () {
+        return this.$store.state.default_worker
+      }
     }
   }
 </script>

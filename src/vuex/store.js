@@ -79,8 +79,8 @@ const store = new Vuex.Store({
       default_worker: '张三，李四   6.18 夜班',  // 默认的值班人员，需要从后台获取，类型字符串
       check_workers: ['李四', '张三'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
       },
-    check_workers: ['李四', '张三'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
-    default_worker: '张三，李四   6.18 夜班',  // 默认的值班人员，需要从后台获取，类型字符串
+    check_workers: ['sysmgr1', 'sysmgr2'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
+    default_worker: ['sysmgr1, sysmgr2   6.18 夜班'],  // 默认的值班人员，需要从后台获取，类型字符串
     all_workers: [{
       value: '6.18 白班',
       label: '张三，李四'
@@ -90,16 +90,6 @@ const store = new Vuex.Store({
     }],  // 所有的值班人员，需要从后台获取，类型数组
     important_select_default_value: [],
     idc_table_data: [],
-    idc_table_data1: [{
-      'select_default_value_ca_tem': '正常',  
-      'select_default_value_ca_hum': '正常',  
-      'select_default_value_5_tem': '正常',   
-      'select_default_value_5_hum': '正常',   
-      'select_default_value_2_tem': '正常',   
-      'select_default_value_2_hum': '正常',   
-      'value_of_check_time': '',  
-      'check_workers': 'sysmgr1', 
-  }],
     detail_table_data: [],
   },
   mutations: {
@@ -140,14 +130,18 @@ const store = new Vuex.Store({
       sessionStorage.setItem('important_select_default_value', save_data);
     },
     changeAllFrontData (state, data) {
-      console.log(data, 'changeAllFrontData')
+      console.log(data, 'changeAllFrontData');
+      state.important_select_default_value = data.important_service  // 将接口获取的数据给state
+      state.all_workers = data.all_workers  // 将接口获取的数据给state
+      state.default_worker = data.default_worker  // 将接口获取的数据给state
+      console.log(state.important_select_default_value, 'set important')
       if (data.detail_table_data.length == 0) {  // 更改详细记录的数据
         state.all_front_data = state.default_front_data // 设置默认值
         state.detail_table_data = state.default_front_data.detail_table_data
         console.log('set defaul all data')
       }else {
         state.all_front_data = data
-        state.detail_table_data = state.all_front_data.detail_table_data
+        state.detail_table_data = data.detail_table_data  // 将接口获取的数据给state， 同时存放到sessionStorage
         let detail_table_data = JSON.stringify(state.all_front_data.detail_table_data)
         sessionStorage.setItem('detail_table_data', detail_table_data);
         console.log(state.detail_table_data,'detail')
@@ -157,21 +151,25 @@ const store = new Vuex.Store({
         console.log(state.idc_table_data,'idc','default idac')
       }else{
         state.all_front_data = data
-        state.idc_table_data = state.all_front_data.idc_table_data
+        state.idc_table_data = state.all_front_data.idc_table_data  // 将接口获取的数据给state
+        state.check_workers = data.idc_table_data[0].check_workers
         let save_data = JSON.stringify(state.all_front_data.idc_table_data)
         sessionStorage.setItem('idc_table_data', save_data);
         console.log(state.idc_table_data,'change idc')
       }
-        
+
     },
-    
+
   },
+  //  以下的getters属性函数在本项目中用不到了，可以删掉
+  //  本getter主要作用是将存放在sessionStorage中的数据取出来
   getters: {
     // 相当于computed
     important_service_data: function (state) {
       if (state.important_select_default_value.length == 0) {
         let important_select
-        important_select = JSON.parse(sessionStorage.getItem('important_select_default_value')); // 注意：important_select这个变量名在getters中，
+        important_select = JSON.parse(sessionStorage.getItem('important_select_default_value')); // 注意：
+        // important_select这个变量名在getters中，
         // 要保证唯一
         console.log(important_select, 'getter get sessionStorage services')
         state.important_select_default_value = important_select;
@@ -183,7 +181,7 @@ const store = new Vuex.Store({
     },
     idc_table_data: function (state) {
       if (state.idc_table_data.length == 0) {
-        let idc_data 
+        let idc_data
         idc_data = JSON.parse(sessionStorage.getItem('idc_table_data')); // 注意：idc_data这个变量名在getters中，
         // 要保证唯一
         state.idc_table_data = idc_data;

@@ -111,15 +111,7 @@
           value: '遭受攻击',
           label: '遭受攻击'
         }],
-        select_default_value: this.$store.state.important_service_data
-      }
-    },
-    methods: {
-      getApiData (){
-        this.$api.get('current_record_data',null, r =>{
-            this.$store.commit('changeAllFrontData', r.data)
-            console.log(r.data, 'brfore created, axios get')
-        })
+
       }
     },
     beforeCreate: function (){
@@ -129,11 +121,27 @@
             this.$store.commit('changeAllFrontData', r.data)
             console.log(r.data, 'brfore created, axios get')
         })
-        
+
     },
-    
-        
-    
+    computed: {
+      // 要想将vuex中state变化后的数据实时更改在页面上，必须通过computed属性来动态改变，不能直接给data中的数据赋state中的值，
+      // 因为这样并不起作用
+      select_default_value: function () {
+        if (this.$store.state.important_select_default_value.length == 0){
+          return [{
+            'select_default_value1': 'bbb正常',
+            'select_default_value2': '正常',
+            'select_default_value3': '正常',
+            'select_default_value4': '正常',
+            'select_default_value5': '正常'
+          }]
+        }
+        return this.$store.state.important_select_default_value
+      }
+    }
+
+
+
   }
 </script>
 

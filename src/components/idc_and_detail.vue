@@ -13,11 +13,11 @@
       @selection-change="handleIdcSelectionChange">
       <el-table-column
         type="selection"
-        min-width="30">
+        min-width="20">
       </el-table-column>
       <el-table-column
         label="CA机房温度"
-        min-width="180"
+        min-width="120"
         align="center"
       >
         <template slot-scope="scope">
@@ -36,7 +36,7 @@
       <el-table-column
         label="CA机房湿度"
         align="center"
-        min-width="180"
+        min-width="120"
       >
         <template slot-scope="scope">
           <div class="my-select">
@@ -54,7 +54,7 @@
       <el-table-column
         label="5楼机房温度"
         align="center"
-        min-width="180"
+        min-width="120"
       >
         <template slot-scope="scope">
           <div class="my-select">
@@ -73,7 +73,7 @@
       <el-table-column
         label="5楼机房湿度"
         align="center"
-        min-width="180">
+        min-width="120">
         <template slot-scope="scope">
           <div class="my-select">
             <el-select v-model="scope.row.select_default_value_5_hum" class="select-style">
@@ -90,7 +90,7 @@
       <el-table-column
         align="center"
         label="2号楼机房温度"
-        min-width="180">
+        min-width="120">
         <template slot-scope="scope">
           <div class="my-select">
             <el-select v-model="scope.row.select_default_value_2_tem" class="select-style">
@@ -112,7 +112,7 @@
       <el-table-column
         label="2号楼机房湿度"
         align="center"
-        min-width="180">
+        min-width="120">
         <template slot-scope="scope">
           <div class="my-select">
             <el-select v-model="scope.row.select_default_value_2_hum" class="select-style">
@@ -129,7 +129,7 @@
       <el-table-column
         label="巡检时间"
         align="center"
-        min-width="240">
+        min-width="200">
         <template slot-scope="scope">
           <div class="block">
             <el-date-picker
@@ -182,11 +182,11 @@
               @selection-change="handleDetailSelectionChange">
       <el-table-column
         type="selection"
-        min-width="30">
+        min-width="20">
       </el-table-column>
       <el-table-column
         label="硬件"
-        min-width="220"
+        min-width="180"
         align="center">
         <template slot-scope="scope">
           <div class="my-textarea">
@@ -197,7 +197,7 @@
       <el-table-column
         label="系统"
         align="center"
-        min-width="220"
+        min-width="180"
         >
         <template slot-scope="scope">
           <div class="my-textarea">
@@ -208,7 +208,7 @@
       <el-table-column
         label="网络"
         align="center"
-        min-width="220"
+        min-width="180"
         >
         <template slot-scope="scope">
           <div class="my-textarea">
@@ -220,7 +220,7 @@
       <el-table-column
         label="服务"
         align="center"
-        min-width="230">
+        min-width="180">
         <template slot-scope="scope">
           <div class="my-textarea">
             <el-input v-model="scope.row.service_default_value" placeholder="" type="textarea"  autosize resize="none"></el-input>
@@ -230,7 +230,7 @@
       <el-table-column
         align="center"
         label="其他"
-        min-width="230">
+        min-width="180">
         <template slot-scope="scope">
           <div class="my-textarea">
             <el-input v-model="scope.row.other_default_value" placeholder="" type="textarea"  autosize resize="none"></el-input>
@@ -240,7 +240,7 @@
       <el-table-column
         label="是否处理"
         align="center"
-        min-width="150"
+        min-width="100"
         >
         <template slot-scope="scope">
           <el-select v-model="scope.row.is_handle" placeholder="请选择">
@@ -257,7 +257,7 @@
       <el-table-column
         label="故障报告"
         align="center"
-        min-width="150"
+        min-width="100"
         >
         <template slot-scope="scope">
           <el-select v-model="scope.row.is_report" placeholder="请选择">
@@ -274,7 +274,7 @@
       <el-table-column
         label="告警源"
         align="center"
-        min-width="150"
+        min-width="100"
         >
         <template slot-scope="scope">
           <div class="my-cell">
@@ -315,7 +315,6 @@
       name: "main_table",
       data() {
         return {
-          check_workers:this.$store.state.check_workers,
           value_of_datetime: '',
           options: [{
             value: '正常',
@@ -324,13 +323,11 @@
             value: '异常',
             label: '异常'
           }],
-        
+
           // idc表的默认数据
           // 可以定时将此数据提交给后台存起来成为一个新的数据集
-          idc_table_data: this.$store.state.idc_table_data,
           idcMultipleSelection: [], // idc表选中的数据,用于删除
           detailMultipleSelection: [], // 详细记录表选中的数据,用于删除
-          detail_table_data: this.$store.state.detail_table_data,
           is_handle_select_option: [{
             value: '选项1',
             label: '是'
@@ -410,53 +407,61 @@
             }
           }
         },
+        post_success() {
+          this.$message({
+            message: '恭喜你，这是一条成功消息',
+            type: 'success'
+          });
+        },
+        post_error() {
+          this.$message({
+            message: '恭喜你，这是一条成功消息',
+            type: 'warning'
+          });
+        },
         fetch_all_data() {  // 获取所有要提交的数据,并提交
             let important_service = this.$store.state.important_select_default_value;
-            let idc_data = this.idc_table_data
-            let detail_data = this.detail_table_data
-            let params
-            
-            if(idc_data.length != 0){
-              console.log('dd')
-              let value_of_check_time
-              for (var i=0;i<idc_data.length; i++){
-                value_of_check_time = moment(idc_data[i].value_of_check_time).format("YYYY-MM-DD HH:mm:ss");
-                idc_data[i].value_of_check_time = value_of_check_time
+            let idc_table_data = this.idc_table_data
+            let detail_table_data = this.detail_table_data
+            let all_workers = this.$store.state.all_workers;
+            let default_worker = this.$store.state.default_worker;
+            let params;
+            if(idc_table_data.length != 0){
+              let value_of_check_time;
+              for (var i=0;i<idc_table_data.length; i++){
+                value_of_check_time = moment(idc_table_data[i].value_of_check_time).format("YYYY-MM-DD HH:mm:ss");
+                idc_table_data[i].value_of_check_time = value_of_check_time
                 console.log(value_of_check_time)
               }
             }
-            console.log(idc_data)
             params = {
               important_service: important_service,
-              idc_data: idc_data,
-              detail_data: detail_data
+              idc_table_data: idc_table_data,
+              detail_table_data: detail_table_data,
+              all_workers: all_workers,
+              default_worker: default_worker
             }
-            
-            this.$api.post('current_record_data',params, r =>{
-                console.log(r)
+            console.log(params)
+            this.$api.post('current_record_data',params=params, r =>{
+              console.log(r);
             })
+
         },
-        // // open2是弹出提示框
-        // open2(callback) {
-        //   this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-        //     cancelButtonText: '取消',
-        //     confirmButtonText: '确定',
-        //     type: 'warning'
-        //   }).then(() => {
-        //     callback();
-        //     this.$message({
-        //       type: 'success',
-        //       message: '删除成功!'
-        //     });
-        //   }).catch(() => {
-        //     this.$message({
-        //       type: 'info',
-        //       message: '已取消删除'
-        //     });
-        //   });
-        // }
-        // //
       },
+      computed: {
+        // 要想将vuex中state变化后的数据实时更改在页面上，必须通过computed属性来动态改变，不能直接给data中的数据赋state中的值，
+        // 因为这样并不起作用
+        idc_table_data: function () {
+          console.log(this.$store.state.idc_table_data, 'check_works')
+          return this.$store.state.idc_table_data
+        },
+        detail_table_data: function () {
+          return this.$store.state.detail_table_data
+        },
+        check_workers: function () {
+          return this.$store.state.check_workers
+        }
+      }
     }
 </script>
 
@@ -472,7 +477,7 @@
   中间使用 /deep/
   如下所示：*/
   .my-worker-style /deep/ .el-input__inner{
-    background-color: white
+    background-color: white;
   }
   /*以上是给单个标签指定样式*/
   .my-cell /deep/ .el-input__inner{
