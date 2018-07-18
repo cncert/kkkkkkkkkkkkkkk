@@ -70,23 +70,23 @@ const store = new Vuex.Store({
         alert_source: 'sos2',
       }],
       all_workers: [{
-        value: '6.18 白班',
-        label: '张三，李四'
+        value: '白班',
+        label: 'sysmgr1，sysmgr1'
       }, {
-        value: '6.18 夜班',
-        label: '张三，李四'
+        value: '夜班',
+        label: 'sysmgr1，sysmgr1'
       }],  // 所有可选值班人员，需要从后台获取， 类型数组
-      default_worker: '张三，李四   6.18 夜班',  // 默认的值班人员，需要从后台获取，类型字符串
-      check_workers: ['李四', '张三'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
+      default_worker: 'sysmgr1，sysmgr1   夜班',  // 默认的值班人员，需要从后台获取，类型字符串
+      check_workers: ['sysmgr1', 'sysmgr1'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
       },
     check_workers: ['sysmgr1', 'sysmgr2'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
-    default_worker: ['sysmgr1, sysmgr2   6.18 夜班'],  // 默认的值班人员，需要从后台获取，类型字符串
+    default_worker: ['sysmgr1, sysmgr2   夜班'],  // 默认的值班人员，需要从后台获取，类型字符串
     all_workers: [{
-      value: '6.18 白班',
-      label: '张三，李四'
+      value: '白班',
+      label: 'sysmgr1'
     }, {
-      value: '6.18 夜班',
-      label: '张三，李四'
+      value: '夜班',
+      label: 'sysmgr2'
     }],  // 所有的值班人员，需要从后台获取，类型数组
     important_select_default_value: [],
     idc_table_data: [],
@@ -134,6 +134,7 @@ const store = new Vuex.Store({
       state.important_select_default_value = data.important_service  // 将接口获取的数据给state
       state.all_workers = data.all_workers  // 将接口获取的数据给state
       state.default_worker = data.default_worker  // 将接口获取的数据给state
+      console.log(state.default_worker, 'default worker')
       console.log(state.important_select_default_value, 'set important')
       if (data.detail_table_data.length == 0) {  // 更改详细记录的数据
         state.all_front_data = state.default_front_data // 设置默认值

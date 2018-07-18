@@ -18,9 +18,9 @@
           <el-select v-model="default_worker[0]" placeholder="请选择值班人员" size="small">
             <el-option
             v-for="item in worker"
-            :key="item.value"
+            :key="item.label"
             :label="item.label+ '   ' +item.value"
-            :value="item.value">
+            :value="item.label+ '   ' +item.value">
               <span style="float: left">{{ item.label }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
             </el-option>

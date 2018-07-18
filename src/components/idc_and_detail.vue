@@ -129,7 +129,7 @@
       <el-table-column
         label="巡检时间"
         align="center"
-        min-width="200">
+        min-width="220">
         <template slot-scope="scope">
           <div class="block">
             <el-date-picker

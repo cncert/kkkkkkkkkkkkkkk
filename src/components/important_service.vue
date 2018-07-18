@@ -129,7 +129,7 @@
       select_default_value: function () {
         if (this.$store.state.important_select_default_value.length == 0){
           return [{
-            'select_default_value1': 'bbb正常',
+            'select_default_value1': '正常',
             'select_default_value2': '正常',
             'select_default_value3': '正常',
             'select_default_value4': '正常',
