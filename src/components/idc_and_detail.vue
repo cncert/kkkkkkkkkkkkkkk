@@ -302,9 +302,22 @@
       <el-button type="danger" size="small" @click="deleteDetailRow">删除</el-button>
     </div>
     <div style="line-height: 40px">
-      <h2>
-        <el-button type="primary" icon="el-icon-message" @click="fetch_all_data">交班</el-button>
-      </h2>
+      <el-row :gutter="100" style="margin-left: 0;margin-right: 0">
+        <el-col :span="12">
+          <div style="margin-left:80%" class="grid-content bg-purple">
+            <h2>
+              <el-button type="primary" icon="el-icon-message" @click="fetch_all_data">交班</el-button>
+            </h2>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div style="margin-right:80%" class="grid-content bg-purple">
+            <h2>
+              <el-button type="primary" icon="el-icon-upload" @click="fetch_all_data">暂存</el-button>
+            </h2>
+          </div>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -425,6 +438,9 @@
             let detail_table_data = this.detail_table_data
             let all_workers = this.$store.state.all_workers;
             let default_worker = this.$store.state.default_worker;
+            let class_date = this.$store.state.class_date;
+            let current_timestamp = this.$store.state.current_timestamp;
+            let yesterday_timestamp = this.$store.state.yesterday_timestamp;
             let params;
             if(idc_table_data.length != 0){
               let value_of_check_time;
@@ -439,13 +455,15 @@
               idc_table_data: idc_table_data,
               detail_table_data: detail_table_data,
               all_workers: all_workers,
-              default_worker: default_worker
+              default_worker: default_worker,
+              class_date: class_date,
+              current_timestamp: current_timestamp,
+              yesterday_timestamp: yesterday_timestamp
             }
             console.log(params)
             this.$api.post('current_record_data',params=params, r =>{
               console.log(r);
             })
-
         },
       },
       computed: {

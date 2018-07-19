@@ -81,6 +81,9 @@ const store = new Vuex.Store({
       },
     check_workers: ['sysmgr1', 'sysmgr2'],  // 默认巡检机房的人员，需要从后台获取， 类型数组
     default_worker: ['sysmgr1, sysmgr2   夜班'],  // 默认的值班人员，需要从后台获取，类型字符串
+    class_date : '',
+    current_timestamp: '',
+    yesterday_timestamp: '',
     all_workers: [{
       value: '白班',
       label: 'sysmgr1'
@@ -134,6 +137,9 @@ const store = new Vuex.Store({
       state.important_select_default_value = data.important_service  // 将接口获取的数据给state
       state.all_workers = data.all_workers  // 将接口获取的数据给state
       state.default_worker = data.default_worker  // 将接口获取的数据给state
+      state.class_date = data.class_date
+      state.current_timestamp = data.current_timestamp
+      state.yesterday_timestamp = data.yesterday_timestamp
       console.log(state.default_worker, 'default worker')
       console.log(state.important_select_default_value, 'set important')
       if (data.detail_table_data.length == 0) {  // 更改详细记录的数据
