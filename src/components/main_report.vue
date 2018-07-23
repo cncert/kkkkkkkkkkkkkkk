@@ -8,7 +8,7 @@
           <important_service></important_service>
           <main_table></main_table>
         </el-main>
-        <el-footer style="background-color: #545c64; color: white">XXXXX</el-footer>
+        <el-footer style="background-color: #545c64; color: white">运行管理部</el-footer>
       </el-container>
     </div>
 </template>

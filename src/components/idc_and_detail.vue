@@ -306,14 +306,14 @@
         <el-col :span="12">
           <div style="margin-left:80%" class="grid-content bg-purple">
             <h2>
-              <el-button type="primary" icon="el-icon-message" @click="fetch_all_data">交班</el-button>
+              <el-button type="primary" icon="el-icon-message" @click="save_data_to_db">交班</el-button>
             </h2>
           </div>
         </el-col>
         <el-col :span="12">
           <div style="margin-right:80%" class="grid-content bg-purple">
             <h2>
-              <el-button type="primary" icon="el-icon-upload" @click="fetch_all_data">暂存</el-button>
+              <el-button type="primary" icon="el-icon-upload" @click="fetch_all_data">保存</el-button>
             </h2>
           </div>
         </el-col>
@@ -323,7 +323,8 @@
 </template>
 
 <script>
-  import moment from 'moment'
+  import moment from 'moment';
+  import swal from 'sweetalert';
     export default {
       name: "main_table",
       data() {
@@ -342,27 +343,27 @@
           idcMultipleSelection: [], // idc表选中的数据,用于删除
           detailMultipleSelection: [], // 详细记录表选中的数据,用于删除
           is_handle_select_option: [{
-            value: '选项1',
+            value: '是',
             label: '是'
           }, {
-            value: '选项2',
+            value: '否',
             label: '否',
           }],
           is_report_select_option: [{
-            value: '选项1',
+            value: '有',
             label: '有'
           }, {
-            value: '选项2',
+            value: '无',
             label: '无',
           }],
           alert_source_select_option: [{
-            value: '选项1',
+            value: 'sos2',
             label: 'sos2'
           }, {
-            value: '选项2',
+            value: 'netmon',
             label: 'netmon',
           }, {
-            value: '选项3',
+            value: '邮件',
             label: '邮件',
           }],
         };
@@ -374,13 +375,25 @@
         },
         deleteIdcRow(index, rows) {
           // 删除选中的机房数据
-          for (let i = 0; i < this.idcMultipleSelection.length; i++){
-            for (let n = 0; n < this.idc_table_data.length; n++){
-              if(this.idc_table_data[n] == this.idcMultipleSelection[i]) {
-                this.idc_table_data.splice(n, 1);
+          swal({
+            title: "确定删除吗?",
+            icon: "warning",
+            buttons: ['取消', '确定'],
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              for (let i = 0; i < this.idcMultipleSelection.length; i++){
+                for (let n = 0; n < this.idc_table_data.length; n++){
+                  if(this.idc_table_data[n] == this.idcMultipleSelection[i]) {
+                    this.idc_table_data.splice(n, 1);
+                  }
+                }
               }
+            } else {
+              swal("取消删除!");
             }
-          }
+          })          
         },
         addIdcRow() {
           this.idc_table_data.push({
@@ -412,25 +425,25 @@
         },
         deleteDetailRow() {
           // 删除选中的详细记录数据
-          for (let i = 0; i < this.detailMultipleSelection.length; i++){
-            for (let n = 0; n < this.detail_table_data.length; n++){
-              if(this.detail_table_data[n] == this.detailMultipleSelection[i]) {
-                this.detail_table_data.splice(n, 1);  // 从第n个开始删除，总共删除1个
+          swal({
+            title: "确定删除吗?",
+            icon: "warning",
+            buttons: ['取消', '确定'],
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              for (let i = 0; i < this.detailMultipleSelection.length; i++){
+                for (let n = 0; n < this.detail_table_data.length; n++){
+                  if(this.detail_table_data[n] == this.detailMultipleSelection[i]) {
+                    this.detail_table_data.splice(n, 1);  // 从第n个开始删除，总共删除1个
+                  }
+                }
               }
+            } else {
+              swal("取消删除!");
             }
-          }
-        },
-        post_success() {
-          this.$message({
-            message: '恭喜你，这是一条成功消息',
-            type: 'success'
-          });
-        },
-        post_error() {
-          this.$message({
-            message: '恭喜你，这是一条成功消息',
-            type: 'warning'
-          });
+          })
         },
         fetch_all_data() {  // 获取所有要提交的数据,并提交
             let important_service = this.$store.state.important_select_default_value;
@@ -447,7 +460,7 @@
               for (var i=0;i<idc_table_data.length; i++){
                 value_of_check_time = moment(idc_table_data[i].value_of_check_time).format("YYYY-MM-DD HH:mm:ss");
                 idc_table_data[i].value_of_check_time = value_of_check_time
-                console.log(value_of_check_time)
+                
               }
             }
             params = {
@@ -460,17 +473,56 @@
               current_timestamp: current_timestamp,
               yesterday_timestamp: yesterday_timestamp
             }
-            console.log(params)
+            
             this.$api.post('current_record_data',params=params, r =>{
-              console.log(r);
+              console.log('short save success');
             })
+        },
+        save_data_to_db() {
+          //
+          swal({
+                 title: "请确认您的交班信息是否正确?",
+                 text: "值班人员：" + this.$store.state.default_worker + '\n'  + '值班日期：' + this.$store.state.class_date,
+                 icon: "warning",
+                 buttons: ['我再改改', '我要交班'],
+                 dangerMode: true,
+               })
+               .then((willDelete) => {
+                 if (willDelete) {
+                    
+                    swal({
+                           text: "交班成功!",
+                           button: '确定',
+                       }).then((willDelete) => {
+                          this.$api.post('save_data_to_db', r =>{
+                            console.log('save to db');
+                          });
+                          window.location.reload()
+                       }
+                       );
+                       //
+                    
+                    
+                    //
+                 } else {
+                   swal({
+                           text: "取消交班!",
+                           button: '确定',
+                       }
+                   );
+                 }
+               });
+          //
+
+
+            
         },
       },
       computed: {
         // 要想将vuex中state变化后的数据实时更改在页面上，必须通过computed属性来动态改变，不能直接给data中的数据赋state中的值，
         // 因为这样并不起作用
         idc_table_data: function () {
-          console.log(this.$store.state.idc_table_data, 'check_works')
+          
           return this.$store.state.idc_table_data
         },
         detail_table_data: function () {

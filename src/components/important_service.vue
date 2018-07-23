@@ -7,7 +7,7 @@
     </div>
     <div>
     <el-row>
-      <el-col :span="7" class="my-margin-left">
+      <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
           <!--<div class="title-style">-->
             <!--title-->
@@ -25,7 +25,7 @@
           </el-select>
         </div>
       </el-col>
-      <el-col :span="7" class="my-margin-left">
+      <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
           <iframe class="my-ifram" :src="service_img[0].gen_jing_xiang_f"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
@@ -40,7 +40,7 @@
           </el-select>
         </div>
       </el-col>
-      <el-col :span="7" class="my-margin-left">
+      <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
           <iframe class="my-ifram" :src="service_img[0].quan_wei_yun_jian_ce"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
@@ -55,9 +55,9 @@
           </el-select>
         </div>
       </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="7" class="my-margin-left2">
+    <!-- </el-row>
+    <el-row> -->
+      <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
           <iframe class="my-ifram" :src="service_img[0].www_cnnic_cnguan_wang_jian_kong"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
@@ -72,7 +72,7 @@
           </el-select>
         </div>
       </el-col>
-      <el-col :span="7" class="my-margin-left2">
+      <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
           <iframe class="my-ifram" :src="service_img[0].ccwhoisfu_wu"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
@@ -119,7 +119,7 @@
         // 中读取数据，该文件有暂存数据的功能
         this.$api.get('current_record_data',null, r =>{
             this.$store.commit('changeAllFrontData', r.data)
-            console.log(r.data, 'brfore created, axios get')
+            
         })
 
     },
@@ -129,11 +129,11 @@
       select_default_value: function () {
         if (this.$store.state.important_select_default_value.length == 0){
           return [{
-            'select_default_value1': '正常',
-            'select_default_value2': '正常',
-            'select_default_value3': '正常',
-            'select_default_value4': '正常',
-            'select_default_value5': '正常'
+            'select_default_value1': '平稳运行',
+            'select_default_value2': '平稳运行',
+            'select_default_value3': '平稳运行',
+            'select_default_value4': '平稳运行',
+            'select_default_value5': '平稳运行'
           }]
         }
         return this.$store.state.important_select_default_value
@@ -169,13 +169,13 @@
   }
   .my-ifram{
     width: 100%;
-    height: 300px;
+    height: 230px;
   }
   .my-margin-left{
     margin-left: 3%;
   }
   .my-margin-left2{
-    margin-left: 14%;
+    margin-left: 1%;
   }
   .el-row {
     margin-bottom: 20px;

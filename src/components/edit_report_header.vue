@@ -8,9 +8,9 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-menu-item index="1" style="font-size: larger">记录</el-menu-item>
+        <el-menu-item index="1" style="font-size: larger">值班记录</el-menu-item>
         <el-menu-item index="2" style="font-size: larger" target="_blank">
-          <a style="text-decoration-line: none" href="https://www.baidu.com" target="_blank">历史记录</a>
+          <a style="text-decoration-line: none" href="http://record.cnnic.cn/search/" target="_blank">历史记录</a>
         </el-menu-item>
 
         <el-menu-item index="3" class="align-right select-people">

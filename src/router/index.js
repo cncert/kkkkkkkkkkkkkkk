@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 const routerOptions = [
   {path: '/search', component: 'index'},
-  {path: '/main', component: "main_report"},
+  {path: '/', component: "main_report"},
 ]
 // 匹配路由
 
