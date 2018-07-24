@@ -564,8 +564,8 @@
   /*以上是给单个标签指定样式*/
   .my-cell /deep/ .el-input__inner{
     font-size: 14px;
-    text-align: left;
-    background-color: #606266;
+    text-align: center;
+    background-color: #409eff;  /*机房和详细下拉框颜色*/
     color:  #fff;
   }
   .el-input__inner{
