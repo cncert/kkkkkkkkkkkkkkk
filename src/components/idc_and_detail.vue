@@ -305,16 +305,22 @@
       <el-row :gutter="100" style="margin-left: 0;margin-right: 0">
         <el-col :span="12">
           <div style="margin-left:80%" class="grid-content bg-purple">
-            <h2>
-              <el-button type="primary" icon="el-icon-message" @click="save_data_to_db">交班</el-button>
-            </h2>
+            <el-tooltip placement="top">
+              <div slot="content">将数据保存到数据库，并发送邮件</div>
+                <h2>
+                  <el-button type="primary" icon="el-icon-message" @click="save_data_to_db">交班</el-button>
+                </h2>
+            </el-tooltip>
           </div>
         </el-col>
         <el-col :span="12">
           <div style="margin-right:80%" class="grid-content bg-purple">
-            <h2>
-              <el-button type="primary" icon="el-icon-upload" @click="fetch_all_data">保存</el-button>
-            </h2>
+            <el-tooltip placement="top">
+              <div slot="content">保存您添加的数据，另一台监控机也能看到新的数据<br/>此操作不会交班</div>
+                <h2>
+                  <el-button type="primary" icon="el-icon-upload" @click="fetch_all_data">保存</el-button>
+                </h2>
+            </el-tooltip>
           </div>
         </el-col>
       </el-row>
@@ -393,7 +399,7 @@
             } else {
               swal("取消删除!");
             }
-          })          
+          })
         },
         addIdcRow() {
           this.idc_table_data.push({
@@ -440,8 +446,6 @@
                   }
                 }
               }
-            } else {
-              swal("取消删除!");
             }
           })
         },
@@ -460,7 +464,7 @@
               for (var i=0;i<idc_table_data.length; i++){
                 value_of_check_time = moment(idc_table_data[i].value_of_check_time).format("YYYY-MM-DD HH:mm:ss");
                 idc_table_data[i].value_of_check_time = value_of_check_time
-                
+
               }
             }
             params = {
@@ -473,13 +477,12 @@
               current_timestamp: current_timestamp,
               yesterday_timestamp: yesterday_timestamp
             }
-            
+
             this.$api.post('current_record_data',params=params, r =>{
               console.log('short save success');
             })
         },
         save_data_to_db() {
-          //
           swal({
                  title: "请确认您的交班信息是否正确?",
                  text: "值班人员：" + this.$store.state.default_worker + '\n'  + '值班日期：' + this.$store.state.class_date,
@@ -489,7 +492,7 @@
                })
                .then((willDelete) => {
                  if (willDelete) {
-                    
+                   this.fetch_all_data();
                     swal({
                            text: "交班成功!",
                            button: '确定',
@@ -500,10 +503,6 @@
                           window.location.reload()
                        }
                        );
-                       //
-                    
-                    
-                    //
                  } else {
                    swal({
                            text: "取消交班!",
@@ -512,17 +511,13 @@
                    );
                  }
                });
-          //
-
-
-            
         },
       },
       computed: {
         // 要想将vuex中state变化后的数据实时更改在页面上，必须通过computed属性来动态改变，不能直接给data中的数据赋state中的值，
         // 因为这样并不起作用
         idc_table_data: function () {
-          
+
           return this.$store.state.idc_table_data
         },
         detail_table_data: function () {

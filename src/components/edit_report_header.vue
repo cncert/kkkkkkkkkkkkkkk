@@ -7,7 +7,7 @@
         @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b">
+        active-text-color="#ffd04b" >
         <el-menu-item index="1" style="font-size: larger">值班记录</el-menu-item>
         <el-menu-item index="2" style="font-size: larger" target="_blank">
           <a style="text-decoration-line: none" href="http://record.cnnic.cn/search/" target="_blank">历史记录</a>
