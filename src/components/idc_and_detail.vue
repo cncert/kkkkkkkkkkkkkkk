@@ -318,7 +318,7 @@
             <el-tooltip placement="top">
               <div slot="content">保存您添加的数据，另一台监控机也能看到新的数据<br/>此操作不会交班</div>
                 <h2>
-                  <el-button type="primary" icon="el-icon-upload" @click="fetch_all_data">保存</el-button>
+                  <el-button  type="primary" icon="el-icon-upload" @click="fetch_all_data();save_data_notify()">保存</el-button>
                 </h2>
             </el-tooltip>
           </div>
@@ -428,6 +428,13 @@
             is_report: '无',
             alert_source: 'sos2',
           })
+        },
+        save_data_notify() {
+          this.$notify({
+            title: '成功',
+            message: '数据保存成功',
+            type: 'success'
+          });
         },
         deleteDetailRow() {
           // 删除选中的详细记录数据
