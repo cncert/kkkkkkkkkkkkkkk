@@ -20,24 +20,9 @@
             </el-input>
           </div>
         </el-menu-item>
-        <el-menu-item index="3"  class="align-right">
+        <!-- <el-menu-item index="3"  class="align-right">
           <span>{{people.label}}</span>
-        </el-menu-item>
-
-        <!--<el-menu-item index="3" class="align-right select-people">-->
-          <!--<template>-->
-            <!--<el-select v-model="value6" placeholder="请选择值班人员" size="small">-->
-              <!--<el-option-->
-                <!--v-for="item in cities"-->
-                <!--:key="item.value"-->
-                <!--:label="item.label"-->
-                <!--:value="item.value">-->
-                <!--<span style="float: left">{{ item.label }}</span>-->
-                <!--<span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>-->
-              <!--</el-option>-->
-            <!--</el-select>-->
-          <!--</template>-->
-        <!--</el-menu-item>-->
+        </el-menu-item> -->
       </el-menu>
     </div>
 </template>

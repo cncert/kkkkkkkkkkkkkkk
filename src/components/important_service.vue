@@ -164,7 +164,7 @@
     width: 100%;
   }
   .select-style /deep/ .el-input__inner{
-    background-color: #409eff;  /*重要服务下拉框颜色*/
+    background-color: rgb(84, 92, 100);  /*重要服务下拉框颜色*/
     width: 101%;
     color: white
   }

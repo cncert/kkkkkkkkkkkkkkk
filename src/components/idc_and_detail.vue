@@ -565,7 +565,7 @@
   .my-cell /deep/ .el-input__inner{
     font-size: 14px;
     text-align: center;
-    background-color: #409eff;  /*机房和详细下拉框颜色*/
+    background-color: rgb(84, 92, 100);  /*机房和详细下拉框颜色*/
     color:  #fff;
   }
   .el-input__inner{
