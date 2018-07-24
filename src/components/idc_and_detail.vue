@@ -544,6 +544,9 @@
   .my-worker-style /deep/ .el-input__inner{
     background-color: white;
   }
+  .my-worker-style /deep/ .el-select{
+    width: 100%;
+  }
   /*以上是给单个标签指定样式*/
   .my-cell /deep/ .el-input__inner{
     padding:  0 0 0 5px;
