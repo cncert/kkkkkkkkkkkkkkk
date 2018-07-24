@@ -38,12 +38,16 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '/project/daily_report/report/web/static/static/search.html'),
+    index: path.resolve(__dirname, '../../daily_report/report/web/static/static/index.html'), // 生成主页的入口页面
+    assetsRoot: path.resolve(__dirname, '../../daily_report/report/web/static/static'),   // 存放主页文件的目录 
+    assetsSubDirectory: 'self-static',  // 主页文件的静态文件目录
+    assetsPublicPath: '../static/static/',  // 主页文件index.html中样式文件路径的前缀
 
-    // Paths
-    assetsRoot: path.resolve(__dirname, '/project/daily_report/report/web/static/static'),
-    assetsSubDirectory: 'self-static',
-    assetsPublicPath: '../static/static/',
+
+    // index: path.resolve(__dirname, '../../daily_report/report/web/static/static/search/search.html'), // 生成搜索页面的入口文件
+    // assetsRoot: path.resolve(__dirname, '../../daily_report/report/web/static/static/search/'),  // 存放搜索页面文件的目录 
+    // assetsSubDirectory: 'self-static',  // 搜索页面文件的静态文件目录
+    // assetsPublicPath: '../static/static/search/',   // 搜索页面search.html中样式文件路径的前缀
 
     /**
      * Source Maps

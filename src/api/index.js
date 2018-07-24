@@ -1,6 +1,6 @@
 // 配置API接口地址
 // var root = 'http://record.cnnic.cn/api/'
-var root = 'http://127.0.0.1:8888/api/'
+var root = 'http://record.cnnic.cn/api/'
 // 引用axios
 var axios = require('axios')
 // 自定义判断元素类型JS

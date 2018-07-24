@@ -21,7 +21,7 @@
         align="center"
       >
         <template slot-scope="scope">
-          <div class="my-select">
+          <div class="my-select my-cell">
             <el-select v-model="scope.row.select_default_value_ca_tem " class="select-style">
               <el-option
                 v-for="item in options"
@@ -39,7 +39,7 @@
         min-width="120"
       >
         <template slot-scope="scope">
-          <div class="my-select">
+          <div class="my-select my-cell">
             <el-select v-model="scope.row.select_default_value_ca_hum" class="select-style">
               <el-option
                 v-for="item in options"
@@ -57,7 +57,7 @@
         min-width="120"
       >
         <template slot-scope="scope">
-          <div class="my-select">
+          <div class="my-select my-cell">
             <el-select v-model="scope.row.select_default_value_5_tem" class="select-style">
               <el-option
                 v-for="item in options"
@@ -75,7 +75,7 @@
         align="center"
         min-width="120">
         <template slot-scope="scope">
-          <div class="my-select">
+          <div class="my-select my-cell">
             <el-select v-model="scope.row.select_default_value_5_hum" class="select-style">
               <el-option
                 v-for="item in options"
@@ -92,7 +92,7 @@
         label="2号楼机房温度"
         min-width="120">
         <template slot-scope="scope">
-          <div class="my-select">
+          <div class="my-select my-cell">
             <el-select v-model="scope.row.select_default_value_2_tem" class="select-style">
               <el-option
                 v-for="item in options"
@@ -114,7 +114,7 @@
         align="center"
         min-width="120">
         <template slot-scope="scope">
-          <div class="my-select">
+          <div class="my-select my-cell">
             <el-select v-model="scope.row.select_default_value_2_hum" class="select-style">
               <el-option
                 v-for="item in options"
@@ -131,7 +131,7 @@
         align="center"
         min-width="220">
         <template slot-scope="scope">
-          <div class="block">
+          <div class="block my-date-style my-cell">
             <el-date-picker
               v-model="scope.row.value_of_check_time"
               type="datetime"
@@ -243,6 +243,7 @@
         min-width="100"
         >
         <template slot-scope="scope">
+          <div class="my-cell">
           <el-select v-model="scope.row.is_handle" placeholder="请选择">
             <el-option
               v-for="item in is_handle_select_option"
@@ -252,6 +253,7 @@
               >
             </el-option>
           </el-select>
+          </div>
         </template>
       </el-table-column>
       <el-table-column
@@ -260,6 +262,7 @@
         min-width="100"
         >
         <template slot-scope="scope">
+          <div class="my-cell">
           <el-select v-model="scope.row.is_report" placeholder="请选择">
             <el-option
               v-for="item in is_report_select_option"
@@ -269,6 +272,7 @@
             >
             </el-option>
           </el-select>
+          </div>
         </template>
       </el-table-column>
       <el-table-column
@@ -554,15 +558,17 @@
   .my-worker-style /deep/ .el-select{
     width: 100%;
   }
+  .my-date-style /deep/ .el-input{
+    width: 100%;
+  }
   /*以上是给单个标签指定样式*/
   .my-cell /deep/ .el-input__inner{
-    padding:  0 0 0 5px;
     font-size: 14px;
     text-align: left;
+    background-color: #606266;
+    color:  #fff;
   }
   .el-input__inner{
-    background-color: #fff;
-    color: #606266;
     padding: 0;
   }
   .el-main[data-v-6efe4612]{

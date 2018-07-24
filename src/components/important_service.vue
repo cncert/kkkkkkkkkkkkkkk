@@ -163,6 +163,11 @@
     line-height: 40px;
     width: 100%;
   }
+  .select-style /deep/ .el-input__inner{
+    background-color: #606266;
+    width: 101%;
+    color: white
+  }
   .title-style{
     max-height: 30px;
     line-height: 30px
@@ -173,6 +178,9 @@
   }
   .my-margin-left{
     margin-left: 3%;
+  }
+  .my-margin-left /deep/ .grid-content{
+    width: 115%;
   }
   .my-margin-left2{
     margin-left: 1%;
