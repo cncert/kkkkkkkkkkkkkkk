@@ -1,4 +1,5 @@
 <template>
+  <!--记录机房数据和详细故障-->
   <div class="block">
     <div class="tags-container">
       <h2>

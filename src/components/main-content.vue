@@ -1,69 +1,124 @@
 <template>
+  <!--new展示每天的主要故障-->
   <div class="block">
-    <el-date-picker
-      v-model="value13"
-      type="daterange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :default-time="['00:00:00', '23:59:59']">
-    </el-date-picker>
-      <el-button type="primary" >按时间范围筛选</el-button>
-
-    <el-table align="center"
-      :data="tableData5"
-      style="width: 100%;margin-top: 20px">
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%">
       <el-table-column
+        prop="date"
+        label="日期"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
         label="班次"
-        width="150"
-        prop="date_class"
-        align="center">
+        width="80">
       </el-table-column>
       <el-table-column
-        label="星期"
-        align="center"
-        width="50"
-        prop="week">
-      </el-table-column>
-      <el-table-column
+        prop="address"
         label="值班人员"
-        align="center"
-        width="250"
-        prop="name">
-      </el-table-column>
-
-      <el-table-column
-        label="重要故障"
-        prop="desc"
-        width="700">
-        <!--width：设置表格宽度-->
+        width="180">
       </el-table-column>
       <el-table-column
-        align="center"
-        label="详细">
-        <template slot-scope="scope">
-          <!--通过 slot-scope 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据-->
-          <!--scope.row 会获取一个data元素的所有数据-->
-          <el-button @click="handleClick(scope.$index ,scope.row)" type="text" size="small">查看详细</el-button>
-        </template>
+        prop="address"
+        label="主要故障">
       </el-table-column>
     </el-table>
+    <div class="block" style="margin-top: 20px">
+      <span class="demonstration"></span>
+      <el-pagination
+        background
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[14, 50, 100]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="show_data.length">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
     export default {
-      name: "main_content",
+      name: "display_detail_table",
       data() {
         return {
-          value13: []
+          tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }], //存放展示数据，它的数据是由下边的computed更改过的
+          filter_data: [], //存放展示数据，它的数据是由下边的computed更改过的
+          show_data:[],
+          fetchData: [],
+          // isTime: '',  //True  or False  显示何种图标
+          currentPage: 1,
+          pageSize: 28
         };
       },
       methods: {
-        handleClick(index, row) {
-          console.log(index, row)
+        handleSizeChange(val) {
+          console.log(`每页 ${val} 条`);
+          this.pageSize = val
         },
-        dateClass(row) {
-          this.date_class = row.date + '  ' + row.day_or_night
+        handleCurrentChange(val) {
+          console.log(`当前页: ${val}`);
+          this.currentPage = val
+        },
+        // jumps(key){
+        //   // 跳转到详细页面
+        //   let date
+        //   let on_watch
+        //   date = key.target.innerText.split(' ')[0]
+        //   on_watch = key.target.innerText.split(' ')[1].split('\n')
+        //   on_watch = on_watch[2]
+        //   window.open('http://record.cnnic.cn/history_report/' + date +'/' + on_watch, '_blank')
+        // }
+      },
+      created: function(){ // 只在加载页面时执行一次
+        // 从服务器获取数据
+        let dataArray = [];
+        this.$api.get('get_data',null, r =>{
+          for (let item of r.data){
+            dataArray.push(item[0])
+          }
+          this.tableData = dataArray;
+          this.$store.commit('changeAllData', dataArray)
+        })
+        //将数据存放到vuex
+
+      },
+      computed: {
+        from_vuex_all_data: function () {
+          // 从vuex取数据
+          if (this.$store.state.filter_data.length == 0){
+            this.show_data = this.tableData;
+            return this.show_data.slice((this.currentPage-1)*this.pageSize,this.currentPage*this.pageSize)
+            //分页： this.show_data.slice((this.currentPage-1)*this.pageSize,this.currentPage*this.pageSize)
+            //从所有数据中，根据当前页数值和每页数量值，获取每页数据
+          }else if(this.$store.state.filter_data[0] == 'none_data'){
+            this.show_data = [];
+            return this.show_data.slice((this.currentPage-1)*this.pageSize,this.currentPage*this.pageSize)
+          }else {
+            this.filter_data = this.$store.state.filter_data;
+            this.show_data = this.filter_data;
+            return this.show_data.slice((this.currentPage-1)*this.pageSize,this.currentPage*this.pageSize)
+          }
         }
       }
     }
@@ -95,5 +150,6 @@
   .el-table .cell {
     /*pre-line 合并空白符序列，但是保留换行符。*/
     white-space: pre-line;
+    text-align: left;
   }
 </style>

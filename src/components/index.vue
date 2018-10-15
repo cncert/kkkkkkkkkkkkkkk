@@ -7,7 +7,7 @@
         <el-main>
           <!--<main_content></main_content>-->
           <search></search>
-          <main_2></main_2>
+          <display_detail_table></display_detail_table>
         </el-main>
         <el-footer style="background-color: #545c64; color: white">运行管理部</el-footer>
       </el-container>
@@ -16,15 +16,15 @@
 
 <script>
   import mynav_header from './header'
-  import main_content from './idc_and_detail'
-  import main_2 from './main_2'
+  // import main_content from './idc_and_detail'
+  // import main_2 from './main_2'
   import search from './search'
+  import display_detail_table from './main-content'
     export default {
       name: "index",
       components: {
         mynav_header,
-        main_content,
-        main_2,
+        display_detail_table,
         search
       }
     }

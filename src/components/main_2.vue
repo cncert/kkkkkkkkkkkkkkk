@@ -1,11 +1,12 @@
 <template>
+  <!--old展示每天的主要故障-->
   <div>
   <el-row >
     <!--指定使用computed中的‘from_vuex_all_data’计算过的数据，而不是直接使用datas的数据-->
     <!--为了使每条数据的dom元素唯一，指定一个key，:key="item.id"-->
     <el-col :span="3" v-for="item in from_vuex_all_data" :key="item.id" class="space" >
       <!--添加tooltip-->
-      <el-popover 
+      <el-popover
         placement="top"
         width="300"
         trigger="hover"
@@ -104,7 +105,7 @@
             this.$store.commit('changeAllData', r.data)
           })
           //将数据存放到vuex
-          
+
       },
       computed: {
         from_vuex_all_data: function () {

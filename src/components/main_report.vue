@@ -17,7 +17,7 @@
   import mynav_header from './edit_report_header'
   import main_table from './idc_and_detail'
   import important_service from './important_service'
-  
+
 
     export default {
       name: "index",
