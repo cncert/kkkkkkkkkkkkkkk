@@ -10,7 +10,7 @@
         active-text-color="#ffd04b" >
         <el-menu-item index="1" style="font-size: larger">值班记录</el-menu-item>
         <el-menu-item index="2" style="font-size: larger" target="_blank">
-          <a style="text-decoration-line: none" href="http://record.cnnic.cn/search/" target="_blank">历史记录</a>
+          <router-link style="text-decoration: none" to="/search" target="_blank">历史记录</router-link>
         </el-menu-item>
 
         <el-menu-item index="3" class="align-right select-people">
