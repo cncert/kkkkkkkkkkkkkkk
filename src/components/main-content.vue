@@ -80,18 +80,9 @@
           console.log(`当前页: ${val}`);
           this.currentPage = val
         },
-        // jumps(key){
-        //   // 跳转到详细页面
-        //   let date
-        //   let on_watch
-        //   date = key.target.innerText.split(' ')[0]
-        //   on_watch = key.target.innerText.split(' ')[1].split('\n')
-        //   on_watch = on_watch[2]
-        //   window.open('http://record.cnnic.cn/history_report/' + date +'/' + on_watch, '_blank')
-        // }
       },
       created: function(){ // 只在加载页面时执行一次
-        // 从服务器获取数据
+        // 从服务器获取数据，取出数据传给this.tableData
         let dataArray = [];
         this.$api.get('get_data',null, r =>{
           for (let item of r.data){
