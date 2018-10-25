@@ -2,7 +2,7 @@
   <!--new展示每天的主要故障-->
   <div class="block">
     <el-table
-      :data="tableData"
+      :data="from_vuex_all_data"
       border
       style="width: 100%">
       <el-table-column
@@ -11,17 +11,17 @@
         width="180">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="classes"
         label="班次"
         width="80">
       </el-table-column>
       <el-table-column
-        prop="address"
+        prop="name"
         label="值班人员"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="address"
+        prop="desc"
         label="主要故障">
       </el-table-column>
     </el-table>
@@ -46,29 +46,13 @@
       name: "display_detail_table",
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }], //存放展示数据，它的数据是由下边的computed更改过的
+          tableData: [], //存放展示数据，它的数据是由下边的computed更改过的
           filter_data: [], //存放展示数据，它的数据是由下边的computed更改过的
           show_data:[],
           fetchData: [],
           // isTime: '',  //True  or False  显示何种图标
           currentPage: 1,
-          pageSize: 28
+          pageSize: 14
         };
       },
       methods: {
