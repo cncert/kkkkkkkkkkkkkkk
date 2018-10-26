@@ -97,7 +97,6 @@ const store = new Vuex.Store({
   },
   mutations: {
     changeAllData (state, datas) {
-
       state.all_data = datas
     },
     changeFilterData (state, filterData) {

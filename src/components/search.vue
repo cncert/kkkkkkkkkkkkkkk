@@ -8,7 +8,7 @@
       range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
-      :default-time="['16:00:00', '10:00:00']"
+      :default-time="['16:00:00', '09:00:00']"
       :picker-options="pickerOptions2">
     </el-date-picker>
 
@@ -63,7 +63,7 @@
             end_time = moment().format('YYYY-MM-DD HH:mm:ss');
           }else {
             start_time = moment(this.value13[0]).format("YYYY-MM-DD HH:mm:ss");
-            end_time = moment(this.value13[1]).format("YYYY-MM-DD HH:mm:ss");
+            end_time = moment(this.value13[1]).add(1, 'days').format("YYYY-MM-DD HH:mm:ss");
           }
           timeArry = [start_time, end_time];
           this.$store.commit('changeSearchTime', timeArry)
@@ -74,7 +74,8 @@
           let end_time;
           start_time = this.$store.state.start_time;
           end_time = this.$store.state.end_time;
-          timeObj = item[0].dateTime;
+          
+          timeObj = item.dateTime;
           if ((moment(timeObj).isAfter(start_time))
             && (moment(timeObj).isBefore(end_time))
           ){

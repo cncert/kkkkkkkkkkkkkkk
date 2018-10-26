@@ -62,7 +62,7 @@
       filterBySearchKey (item) {
         let itemIterator;
         let filterKey = ['classes', 'name', 'desc', 'dateTime', 'week']
-        itemIterator = Reflect.enumerate(item[0])
+        itemIterator = Reflect.enumerate(item)
         for (var i of filterKey){
           if (typeof itemIterator['_t'][i] == 'object'){
             for (var sub of itemIterator['_t'][i] ){
