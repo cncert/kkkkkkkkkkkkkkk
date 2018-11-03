@@ -8,7 +8,16 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        width="180"
+        >
+        <template slot-scope="scope">
+        <el-button
+          @click.native.prevent="jumps(scope.row)"
+          type="text"
+          size="small">
+          {{scope.row.date}}
+        </el-button>
+      </template>
       </el-table-column>
       <el-table-column
         prop="classes"
@@ -64,6 +73,14 @@
           console.log(`当前页: ${val}`);
           this.currentPage = val
         },
+        jumps(key){
+          // 跳转到详细页面
+          let date
+          let on_watch
+          date = key.date
+          on_watch = key.name
+          window.open('http://record.cnnic.cn/history_report/' + date +'/' + on_watch, '_blank')
+        }
       },
       created: function(){ // 只在加载页面时执行一次
         // 从服务器获取数据，取出数据传给this.tableData

@@ -46,10 +46,10 @@ module.exports = {
     // assetsPublicPath: '../static/static/',  // 主页文件index.html中样式文件路径的前缀
 
 
-    index: path.resolve(__dirname, '../../daily_report/report/web/static/static/search/search.html'), // 生成搜索页面的入口文件
-    assetsRoot: path.resolve(__dirname, '../../daily_report/report/web/static/static/search/'),  // 存放搜索页面文件的目录 
-    assetsSubDirectory: 'self-static',  // 搜索页面文件的静态文件目录
-    assetsPublicPath: '../static/static/search/',   // 搜索页面search.html中样式文件路径的前缀
+    index: path.resolve(__dirname, '../../daily_report/report/web/static/static/search/search.html'), // 生成历史页面的入口文件
+    assetsRoot: path.resolve(__dirname, '../../daily_report/report/web/static/static/search/'),  // 存放历史页面文件的目录 
+    assetsSubDirectory: 'self-static',  // 历史页面文件的静态文件目录
+    assetsPublicPath: '../static/static/search/',   // 历史页面search.html中样式文件路径的前缀
 
     /**
      * Source Maps
