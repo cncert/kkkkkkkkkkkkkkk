@@ -95,7 +95,7 @@
           date = key.target.innerText.split(' ')[0]
           on_watch = key.target.innerText.split(' ')[1].split('\n')
           on_watch = on_watch[2]
-          window.open('http://record.cnnic.cn/history_report/' + date +'/' + on_watch, '_blank')
+          window.open('http://xxx/history_report/' + date +'/' + on_watch, '_blank')
         }
       },
       created: function(){ // 只在加载页面时执行一次
