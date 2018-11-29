@@ -2,7 +2,7 @@
   "name": "report",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "cncert <635870838@qq.com>",
+  "author": "xxx",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
