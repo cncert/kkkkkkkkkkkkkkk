@@ -79,7 +79,7 @@
           let on_watch
           date = key.date
           on_watch = key.name
-          window.open('http://record.cnnic.cn/history_report/' + date +'/' + on_watch, '_blank')
+          window.open('http://xxx.cn/history_report/' + date +'/' + on_watch, '_blank')
         }
       },
       created: function(){ // 只在加载页面时执行一次
