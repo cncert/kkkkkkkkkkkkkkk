@@ -12,7 +12,7 @@
           <!--<div class="title-style">-->
             <!--title-->
           <!--</div>-->
-          <iframe class="my-ifram" :src="service_img[0].quan_qiu_jie_dian_dnscha_xun"  name="leftFrame" scrolling="No"
+          <iframe class="my-ifram" :src="service_img[0].xxxx_xun"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
           </iframe>
           <el-select v-model="select_default_value[0].select_default_value1" class="select-style" >
@@ -27,7 +27,7 @@
       </el-col>
       <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
-          <iframe class="my-ifram" :src="service_img[0].gen_jing_xiang_f"  name="leftFrame" scrolling="No"
+          <iframe class="my-ifram" :src="service_img[0].xxxang_f"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
           </iframe>
           <el-select v-model="select_default_value[0].select_default_value2" class="select-style">
@@ -42,7 +42,7 @@
       </el-col>
       <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
-          <iframe class="my-ifram" :src="service_img[0].quan_wei_yun_jian_ce"  name="leftFrame" scrolling="No"
+          <iframe class="my-ifram" :src="service_img[0].xxxxn_jian_ce"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
           </iframe>
           <el-select v-model="select_default_value[0].select_default_value3" class="select-style">
@@ -59,7 +59,7 @@
     <el-row> -->
       <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
-          <iframe class="my-ifram" :src="service_img[0].www_cnnic_cnguan_wang_jian_kong"  name="leftFrame" scrolling="No"
+          <iframe class="my-ifram" :src="service_img[0].www_xxxx_jian_kong"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
           </iframe>
           <el-select v-model="select_default_value[0].select_default_value4" class="select-style">
@@ -74,7 +74,7 @@
       </el-col>
       <el-col :span="4" class="my-margin-left">
         <div class="grid-content bg-purple">
-          <iframe class="my-ifram" :src="service_img[0].ccwhoisfu_wu"  name="leftFrame" scrolling="No"
+          <iframe class="my-ifram" :src="service_img[0].xxxu_wu"  name="leftFrame" scrolling="No"
                   noresize="noresize"  id="leftFrame">
           </iframe>
           <el-select v-model="select_default_value[0].select_default_value5" class="select-style">
@@ -140,11 +140,11 @@
       },
       service_img: function(){
         return [{
-          'quan_qiu_jie_dian_dnscha_xun': 'http://netmon.cnnic.cn/dashboard-solo/db/quan-qiu-jie-dian-dnscha-xun?refresh=10s&orgId=1&panelId=6&from=' + this.$store.state.yesterday_timestamp + '&to=' +this.$store.state.current_timestamp + '&panelId=6',
-          'gen_jing_xiang_f': 'http://netmon.cnnic.cn/dashboard-solo/db/gen-jing-xiang-f?refresh=10s&orgId=1&panelId=1&from=' + this.$store.state.yesterday_timestamp + '&to=' + this.$store.state.current_timestamp,
-          'quan_wei_yun_jian_ce': 'http://netmon.cnnic.cn/dashboard-solo/db/quan-wei-yun-jian-ce?refresh=10s&orgId=1&panelId=2&from=' + this.$store.state.yesterday_timestamp  + '&to=' + this.$store.state.current_timestamp,
-          'www_cnnic_cnguan_wang_jian_kong': 'http://netmon.cnnic.cn/d-solo/000000013/www-cnnic-cnguan-wang-jian-kong?refresh=1m&orgId=1&panelId=1&from=' + this.$store.state.yesterday_timestamp  + '&to=' + this.$store.state.current_timestamp + '&var-job=snmp_f5',
-          'ccwhoisfu_wu': 'http://netmon.cnnic.cn/d-solo/000000009/ccwhoisfu-wu?orgId=1&panelId=1&from=' + this.$store.state.yesterday_timestamp  + '&to=' + this.$store.state.current_timestamp + '&var-job=snmp_f5'
+          'qxxxxun': 'http://xxx/dashboard-solo/db/xxn?refresh=10s&orgId=1&panelId=6&from=' + this.$store.state.yesterday_timestamp + '&to=' +this.$store.state.current_timestamp + '&panelId=6',
+          'xxxf': 'http://nxxn/dashboard-solo/db/gxxng-f?refresh=10s&orgId=1&panelId=1&from=' + this.$store.state.yesterday_timestamp + '&to=' + this.$store.state.current_timestamp,
+          'qxxe': 'http://xxxn/dashboard-solo/db/quan-wei-yun-jian-ce?refresh=10s&orgId=1&panelId=2&from=' + this.$store.state.yesterday_timestamp  + '&to=' + this.$store.state.current_timestamp,
+          'www_xxong': 'http://xxn/d-solo/000000013/wxxng?refresh=1m&orgId=1&panelId=1&from=' + this.$store.state.yesterday_timestamp  + '&to=' + this.$store.state.current_timestamp + '&var-job=snmp_f5',
+          'ccxxu': 'http://xxn/d-solo/000000009/cxxwu?orgId=1&panelId=1&from=' + this.$store.state.yesterday_timestamp  + '&to=' + this.$store.state.current_timestamp + '&var-job=snmp_f5'
         }]
       }
     }
